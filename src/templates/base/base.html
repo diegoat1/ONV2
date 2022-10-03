@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        <title>{% block title %} {% endblock %}</title>
+
+        <meta name="description" content="OmegaNUTRICIÓN">
+        <meta name="author" content="DIEGO TOFFALETTI">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="OmegaNUTRICIÓN">
+        <meta property="og:site_name" content="DIEGO TOFFALETTI">
+        <meta property="og:description" content="OmegaNUTRICIÓN">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{ url_for('static', filename='assets/media/favicons/iconw.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='assets/media/favicons/iconw.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='assets/media/favicons/iconw.png') }}">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Fonts and OneUI framework -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" id="css-main" href="{{ url_for('static', filename='assets/css/oneui.min.css') }}">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <link rel="stylesheet" id="css-theme" href="{{ url_for('static', filename='assets/css/themes/city.min.css') }}">
+        <!-- END Stylesheets -->
+
+        <script src="https://a.ftscrt.com/static/script/Chart-custom.js" type="text/javascript"></script>
+        <script src="https://a.ftscrt.com/static/script/jquery-1.7.2.min.js" type="text/javascript"></script>
+ 
+    </head>
+    <body>
+        <!-- Page Container -->
+        <!--
+            Available classes for #page-container:
+
+        GENERIC
+
+            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
+
+        SIDEBAR & SIDE OVERLAY
+
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-dark'                              Dark themed sidebar
+
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
+
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+        HEADER
+
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Light themed Header
+            'page-header-dark'                          Dark themed Header
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+        -->
+        <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
+            <!-- Side Overlay-->
+            <!-- END Side Overlay -->
+
+            <!-- Sidebar -->
+            <!--
+                Sidebar Mini Mode - Display Helper classes
+
+                Adding 'smini-hide' class to an element will make it invisible (opacity: 0) when the sidebar is in mini mode
+                Adding 'smini-show' class to an element will make it visible (opacity: 1) when the sidebar is in mini mode
+                    If you would like to disable the transition animation, make sure to also add the 'no-transition' class to your element
+
+                Adding 'smini-hidden' to an element will hide it when the sidebar is in mini mode
+                Adding 'smini-visible' to an element will show it (display: inline-block) only when the sidebar is in mini mode
+                Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
+            -->
+            <nav id="sidebar" aria-label="Main Navigation">
+                <!-- Side Header -->
+                <div class="content-header bg-white-5">
+                    <!-- Logo -->
+                    <img height="15px" src="{{ url_for('static', filename='assets/media/favicons/iconw.png') }}" alt="">
+                    <a class="font-w600 text-dual" href="">
+                        <span class="smini-visible">
+                        </span>
+                        <span class="smini-hide font-size-h6 tracking-wider">
+                            Omega<span class="font-w400">NUTRICIÓN</span>
+                        </span>
+                    </a>
+                    <!-- END Logo -->
+
+                    <!-- Options -->
+                    <div>
+                        <!-- Color Variations -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <a class="btn btn-sm btn-dual" id="sidebar-themes-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="si si-drop"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
+                                <!-- Color Themes -->
+                                <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="default" href="#">
+                                    <span>Predeterminado</span>
+                                    <i class="fa fa-circle text-default"></i>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ url_for('static', filename='assets/css/themes/amethyst.min.css') }}" href="#">
+                                    <span>Amatista</span>
+                                    <i class="fa fa-circle text-amethyst"></i>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ url_for('static', filename='assets/css/themes/city.min.css') }}" href="#">
+                                    <span>Ciudad</span>
+                                    <i class="fa fa-circle text-city"></i>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ url_for('static', filename='assets/css/themes/flat.min.css') }}" href="#">
+                                    <span>Plano</span>
+                                    <i class="fa fa-circle text-flat"></i>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ url_for('static', filename='assets/css/themes/modern.min.css') }}" href="#">
+                                    <span>Moderno</span>
+                                    <i class="fa fa-circle text-modern"></i>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ url_for('static', filename='assets/css/themes/smooth.min.css') }}" href="#">
+                                    <span>Suave</span>
+                                    <i class="fa fa-circle text-smooth"></i>
+                                </a>
+                                <!-- END Color Themes -->
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- Sidebar Styles -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_light" href="#">
+                                    <span>Barra lateral Clara</span>
+                                </a>
+                                <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_dark" href="#">
+                                    <span>Barra lateral Oscura</span>
+                                </a>
+                                <!-- Sidebar Styles -->
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- Header Styles -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_light" href="#">
+                                    <span>Encabezado Claro</span>
+                                </a>
+                                <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_dark" href="#">
+                                    <span>Encabezado Oscuro</span>
+                                </a>
+                                <!-- Header Styles -->
+                            </div>
+                        </div>
+                        <!-- END Themes -->
+
+                        <!-- Close Sidebar, Visible only on mobile screens -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <a class="d-lg-none btn btn-sm btn-dual ml-1" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                            <i class="fa fa-fw fa-times"></i>
+                        </a>
+                        <!-- END Close Sidebar -->
+                    </div>
+                    <!-- END Options -->
+                </div>
+                <!-- END Side Header -->
+
+                <!-- Sidebar Scrolling -->
+                <div class="js-sidebar-scroll">
+                    <!-- Side Navigation -->
+                    <div class="content-side">
+                        <ul class="nav-main">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link active" href="/mantenimiento">
+                                    <i class="nav-main-link-icon si si-speedometer"></i>
+                                    <span class="nav-main-link-name">Escritorio</span>
+                                </a>
+                            </li>
+                            {% if username=='Toffaletti, Diego Alejandro' %}
+                            <li class="nav-main-item">
+                              <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-puzzle"></i>
+                                <span class="nav-main-link-name">Administrador</span>
+                              </a>
+                                <ul class="nav-main-submenu">
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/databasemanager">
+                                            <span class="nav-main-link-name">Administrador de Base de datos</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/create">
+                                            <span class="nav-main-link-name">Crear perfil</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/update">
+                                            <span class="nav-main-link-name">Actualizar perfil</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/goal">
+                                            <span class="nav-main-link-name">Definir Objetivo</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/planner">
+                                            <span class="nav-main-link-name">Plan nutricional</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/createfood">
+                                            <span class="nav-main-link-name">Creador de alimentos</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="/recipecreator">
+                                            <span class="nav-main-link-name">Creador de recetas</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                            <li class="nav-main-heading">Funciones</li>
+                            <li class="nav-main-item">
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link active" href="/recipe">
+                                    <i class="nav-main-link-icon fa fa-blender"></i>
+                                    <span class="nav-main-link-name">Recetas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END Side Navigation -->
+                </div>
+                <!-- END Sidebar Scrolling -->
+            </nav>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                <div class="content-header">
+                    <!-- Left Section -->
+                    <div class="d-flex align-items-center">
+                        <!-- Toggle Sidebar -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+                        <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                        <!-- END Toggle Sidebar -->
+
+                        <!-- Toggle Mini Sidebar -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+                        <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+                            <i class="fa fa-fw fa-ellipsis-v"></i>
+                        </button>
+                        <!-- END Toggle Mini Sidebar -->
+
+                        <!-- Open Search Section (visible on smaller screens) -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <!-- END Open Search Section -->
+
+                        <!-- Search Form (visible on larger screens) -->
+                        <!-- END Search Form -->
+                    </div>
+                    <!-- END Left Section -->
+                    <div class="text-center">
+                        <p class="mb-2">
+                            <img height="30px" src="{{ url_for('static', filename='assets/media/favicons/icon.png') }}" alt="">
+                        </p>
+                    </div>
+                    <!-- Right Section -->
+                    <div class="d-flex align-items-center">
+                        <!-- User Dropdown -->
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn btn-sm btn-dual d-flex align-items-center" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle" src="{{ url_for('static', filename='assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 21px;">
+                                <span class="d-none d-sm-inline-block ml-2">{{ username }}</span>
+                                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 border-0" aria-labelledby="page-header-user-dropdown">
+                                <div class="p-3 text-center bg-primary-dark rounded-top">
+                                    <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ url_for('static', filename='assets/media/avatars/avatar10.jpg') }}" alt="">
+                                    <p class="mt-2 mb-0 text-white font-w500">{{ username }}</p>
+                                    <p class="mb-0 text-white-50 font-size-sm">Rol del usuario</p>
+                                </div>
+                                <div class="p-2">
+
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
+                                        <span class="font-size-sm font-w500">Cerrar sesión</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END User Dropdown -->
+
+                        <!-- Notifications Dropdown -->
+                        <!-- END Notifications Dropdown -->
+
+                        <!-- Toggle Side Overlay -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <!-- END Toggle Side Overlay -->
+                    </div>
+                    <!-- END Right Section -->
+                </div>
+                <!-- END Header Content -->
+
+                <!-- Header Search -->
+                <!-- END Header Search -->
+
+                <!-- Header Loader -->
+                <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+                <div id="page-header-loader" class="overlay-header bg-white">
+                    <div class="content-header">
+                        <div class="w-100 text-center">
+                            <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Header Loader -->
+            </header>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+
+                <!-- Hero -->
+                <div class="bg-body-light">
+                    <div class="content content-full">
+                        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                            <h1 class="flex-sm-fill h3 my-2">
+                                {% block herotitle %} {% endblock %}<small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{% block herosubtitle %} {% endblock %}</small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Hero -->
+
+                <!-- Page Content -->
+                <div class="content">
+                    <h2 class="content-heading">{% block contenttitle %} {% endblock %}<small>{% block contentsubtitle %} {% endblock %}</small></h2>
+                    {% block content %} {% endblock %}
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+            
+            <!-- Footer -->
+            <footer id="page-footer" class="bg-body-light">
+                <div class="content py-3">
+                    <div class="row font-size-sm">
+                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                            Desarrollado con <i class="fa fa-hourglass-end   text-danger"></i> por <a class="font-w600" href="https://www.instagram.com/diegotoffaletti/" target="_blank">Toffaletti, Diego Alejandro</a>
+                        </div>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                            <a class="font-w600" href="/" target="_blank">OmegaNUTRICIÓN</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
+
+    {% extends 'base/scripts.html' %}
+
+    </body>
+</html>

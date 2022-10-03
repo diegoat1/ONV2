@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block herotitle %} Crear perfil {% endblock %}
+{% block herosubtitle %} {% endblock %}
+{% block contenttitle %} {% endblock %}
+{% block contentsubtitle %} {% endblock %}
+
+{% block content %}
+
+    {% from "_macro.html" import render_field %}  
+    <div>
+        <!-- Mensaje -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <p class="mb-0">{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <!-- END Mensaje -->
+    </div>
+    <!-- Page Content -->
+    <div class="block block-rounded">
+        <div class="block-content block-content-full">
+            <form name="sentMessage" id="createForm" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <div class="row push">
+                    <div class="col-lg-4">
+                        <p class="font-size-sm text-muted">
+                            Datos personales
+                        </p>
+                    </div>
+                    <div class="col-lg-8 col-xl-5">
+                        <div class="form-group">
+                            <label for="example-text-input">Apellido y nombre:</label>
+                            {{ render_field(form.nameuser, class='form-control', placeholder="Toffaletti, Diego", value=value.0) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-email-input">Número de documento:</label>
+                            {{ render_field(form.dni, class='form-control', placeholder="12345678", value=value.1) }}  
+                        </div>
+                        <div class="form-group">
+                            <label for="example-password-input">Correo electrónico:</label>
+                            {{ render_field(form.email, class='form-control', placeholder="email@ejemplo.com", value=value.3) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-password-input">Número de telefono:</label>
+                            {{ render_field(form.numtel, class='form-control', placeholder="(362)4123456", value=value.2) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row push">
+                    <div class="col-lg-4">
+                        <p class="font-size-sm text-muted">
+                            Datos biologicos
+                        </p>
+                    </div>
+                    <div class="col-lg-8 col-xl-5">
+                        <div class="form-group">
+                            <label for="example-text-input">Fecha de nacimiento:</label>
+                            {{ render_field(form.fdn, class='form-control', value=value.4) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input">Sexo:</label>
+                            {{ render_field(form.sexo, class='form-control', value=value.5) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input">Estatura (en cm.):</label>
+                            {{ render_field(form.estatura, class='form-control', placeholder="Ej.: 170", value=value.6) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input">Circ. del cuello (en cm.):</label>
+                            {{ render_field(form.ccuello, class='form-control', placeholder="Ej.: 35", value=value.7) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input">Circ. de la muñeca (en cm.):</label>
+                            {{ render_field(form.cmuneca, class='form-control', placeholder="Ej.: 15", value=value.8) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input">Circ. del tobillo(en cm.):</label>
+                            {{ render_field(form.ctobillo, class='form-control', placeholder="Ej.: 22", value=value.9) }}
+                        </div>
+                    </div>
+                </div>
+                <div id="success" class="form-group row justify-content-center mb-0">
+                    <div class="col-md-6 col-xl-5">
+                        <button type="submit" class="btn btn-block btn-primary">
+                            <i class="fa fa-fw fa-user-check mr-1"></i> Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END Page Content -->
+{% endblock %}

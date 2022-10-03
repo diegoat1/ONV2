@@ -1,0 +1,614 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block herotitle %} Creador de recetas {% endblock %}
+{% block herosubtitle %} {% endblock %}
+{% block contenttitle %} {% endblock %}
+{% block contentsubtitle %} {% endblock %}
+
+{% block content %}
+
+{% from "_macro.html" import render_field %}  
+
+<div>
+    <!-- Mensaje -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <p class="mb-0">{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- END Mensaje -->
+</div>
+
+
+<div class="js-wizard-simple block block">
+    <!-- Step Tabs -->
+    <ul class="nav nav-tabs nav-tabs-alt nav-justified" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#wizard-simple2-step1" data-toggle="tab">1. Nombre de la receta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#wizard-simple2-step2" data-toggle="tab">2. Alimentos independientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#wizard-simple2-step3" data-toggle="tab">3. Alimentos dependientes</a>
+        </li>
+    </ul>
+    <!-- END Step Tabs -->
+
+    <!-- Form -->
+    <form name="sentMessage" id="recipecreateForm" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <!-- Steps Content -->
+        <div class="block-content block-content-full tab-content px-md-5">
+            <!-- Step 1 -->
+            <div class="tab-pane active" id="wizard-simple2-step1" role="tabpanel">
+                <div class="form-group col-md-6 offset-md-3">
+                    <label>Nombre de la receta</label>
+                    {{ render_field(form.recipename, class='form-control', placeholder="Arroz con pollo y verduras") }}
+                </div>
+            </div>
+            <!-- END Step 1 -->
+
+            <!-- Step 2 -->
+            <div class="tab-pane" id="wizard-simple2-step2" role="tabpanel">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-3 offset-md-3 font-size-sm">
+                            <label>Alimento independiente 1:</label>
+                            {{ render_field(form.foodi1, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 1:</label>
+                            {{ render_field(form.foodisize1, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 offset-md-3 font-size-sm">
+                            <label>Alimento independiente 2:</label>
+                            {{ render_field(form.foodi2, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 2:</label>
+                            {{ render_field(form.foodisize2, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 offset-md-3 font-size-sm">
+                            <label>Alimento independiente 3:</label>
+                            {{ render_field(form.foodi3, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 3:</label>
+                            {{ render_field(form.foodisize3, class='form-control') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END Step 2 -->
+
+            <!-- Step 3 -->
+            <div class="tab-pane" id="wizard-simple2-step3" role="tabpanel">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 1</label>
+                            {{ render_field(form.food1, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 1:</label>
+                            {{ render_field(form.foodsize1, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood1, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 1 respecto a:</label>
+                            {{ render_field(form.reffood1, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 1:</label>
+                            {{ render_field(form.valfood1, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 2</label>
+                            {{ render_field(form.food2, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 2:</label>
+                            {{ render_field(form.foodsize2, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood2, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 2 respecto a:</label>
+                            {{ render_field(form.reffood2, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 2:</label>
+                            {{ render_field(form.valfood2, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 3</label>
+                            {{ render_field(form.food3, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 3:</label>
+                            {{ render_field(form.foodsize3, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood3, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 3 respecto a:</label>
+                            {{ render_field(form.reffood3, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 3:</label>
+                            {{ render_field(form.valfood3, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 4</label>
+                            {{ render_field(form.food4, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 4:</label>
+                            {{ render_field(form.foodsize4, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood4, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 4 respecto a:</label>
+                            {{ render_field(form.reffood4, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 4:</label>
+                            {{ render_field(form.valfood4, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 5</label>
+                            {{ render_field(form.food5, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 5:</label>
+                            {{ render_field(form.foodsize5, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood5, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 5 respecto a:</label>
+                            {{ render_field(form.reffood5, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 5:</label>
+                            {{ render_field(form.valfood5, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 6</label>
+                            {{ render_field(form.food6, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 6:</label>
+                            {{ render_field(form.foodsize6, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood6, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 6 respecto a:</label>
+                            {{ render_field(form.reffood6, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 6:</label>
+                            {{ render_field(form.valfood6, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 7</label>
+                            {{ render_field(form.food7, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 7:</label>
+                            {{ render_field(form.foodsize7, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood7, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 7 respecto a:</label>
+                            {{ render_field(form.reffood7, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 7:</label>
+                            {{ render_field(form.valfood7, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 8</label>
+                            {{ render_field(form.food8, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 8:</label>
+                            {{ render_field(form.foodsize8, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood8, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 8 respecto a:</label>
+                            {{ render_field(form.reffood8, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 8:</label>
+                            {{ render_field(form.valfood8, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 9</label>
+                            {{ render_field(form.food9, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 9:</label>
+                            {{ render_field(form.foodsize9, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood9, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 9 respecto a:</label>
+                            {{ render_field(form.reffood9, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 9:</label>
+                            {{ render_field(form.valfood9, class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Alimento dependiente 10</label>
+                            {{ render_field(form.food10, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-3 font-size-sm">
+                            <label>Tamaño de la porción 10:</label>
+                            {{ render_field(form.foodsize10, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>En relación/porción fija:</label>
+                            {{ render_field(form.relfood10, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Alimento 10 respecto a:</label>
+                            {{ render_field(form.reffood10, class='form-control') }}
+                        </div>
+                        <div class="form-group col-md-2 font-size-sm">
+                            <label>Valor del alimento 10:</label>
+                            {{ render_field(form.valfood10, class='form-control') }}
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                </div>
+            </div>
+            <!-- END Step 3 -->
+        </div>
+        <!-- END Steps Content -->
+
+        <!-- Steps Navigation -->
+        <div class="block-content block-content-sm block-content-full bg-body-light rounded-bottom">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-alt-primary" data-wizard="prev">
+                        <i class="fa fa-angle-left mr-1"></i> Anterior
+                    </button>
+                </div>
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-alt-primary disabled d-none" data-wizard="next">
+                        Siguiente <i class="fa fa-angle-right ml-1"></i>
+                    </button>
+                    <button type="submit" class="btn btn-primary" data-wizard="finish">
+                        <i class="fa fa-pepper-hot mr-1"></i> Crear receta
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- END Steps Navigation -->
+    </form>
+    <!-- END Form -->
+</div>
+<script>
+    var foodi1_select = document.getElementById("foodi1");
+    var foodisize1_select = document.getElementById("foodisize1");
+    var foodi2_select = document.getElementById("foodi2");
+    var foodisize2_select = document.getElementById("foodisize2");
+    var foodi3_select = document.getElementById("foodi3");
+    var foodisize3_select = document.getElementById("foodisize3");
+    var food1_select = document.getElementById("food1");
+    var foodsize1_select = document.getElementById("foodsize1");
+    var food2_select = document.getElementById("food2");
+    var foodsize2_select = document.getElementById("foodsize2");
+    var food3_select = document.getElementById("food3");
+    var foodsize3_select = document.getElementById("foodsize3");
+    var food4_select = document.getElementById("food4");
+    var foodsize4_select = document.getElementById("foodsize4");
+    var food5_select = document.getElementById("food5");
+    var foodsize5_select = document.getElementById("foodsize5");
+    var food6_select = document.getElementById("food6");
+    var foodsize6_select = document.getElementById("foodsize6");
+    var food7_select = document.getElementById("food7");
+    var foodsize7_select = document.getElementById("foodsize7");
+    var food8_select = document.getElementById("food8");
+    var foodsize8_select = document.getElementById("foodsize8");
+    var food9_select = document.getElementById("food9");
+    var foodsize9_select = document.getElementById("foodsize9");
+    var food10_select = document.getElementById("food10");
+    var foodsize10_select = document.getElementById("foodsize10");
+
+    foodi1_select.onchange = function()  {
+            
+        foodi1 = foodi1_select.value;
+        
+        fetch('/size/' + foodi1).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodisize1_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    foodi2_select.onchange = function()  {
+            
+        foodi2 = foodi2_select.value;
+        
+        fetch('/size/' + foodi2).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodisize2_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    foodi3_select.onchange = function()  {
+            
+        foodi3 = foodi3_select.value;
+        
+        fetch('/size/' + foodi3).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodisize3_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food1_select.onchange = function()  {
+            
+        food1 = food1_select.value;
+        
+        fetch('/size/' + food1).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize1_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food2_select.onchange = function()  {
+            
+        food2 = food2_select.value;
+        
+        fetch('/size/' + food2).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize2_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food3_select.onchange = function()  {
+            
+        food3 = food3_select.value;
+        
+        fetch('/size/' + food3).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize3_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food4_select.onchange = function()  {
+            
+        food4 = food4_select.value;
+        
+        fetch('/size/' + food4).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize4_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food5_select.onchange = function()  {
+            
+        food5 = food5_select.value;
+        
+        fetch('/size/' + food5).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize5_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food6_select.onchange = function()  {
+            
+        food6 = food6_select.value;
+        
+        fetch('/size/' + food6).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize6_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food7_select.onchange = function()  {
+            
+        food7= food7_select.value;
+        
+        fetch('/size/' + food7).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize7_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food8_select.onchange = function()  {
+            
+        food8 = food8_select.value;
+        
+        fetch('/size/' + food8).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize8_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food9_select.onchange = function()  {
+            
+        food9 = food9_select.value;
+        
+        fetch('/size/' + food9).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize9_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    food10_select.onchange = function()  {
+            
+        food10 = food10_select.value;
+        
+        fetch('/size/' + food10).then(function(response) {
+
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var size of data.sizes) {
+                    optionHTML += '<option value="' + size.id + '">' + size.porcion + '</option>';
+                }
+
+                foodsize10_select.innerHTML = optionHTML;
+            });
+            
+        });
+    }
+    
+</script>
+{% endblock %}
